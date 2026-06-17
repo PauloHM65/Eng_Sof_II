@@ -2,7 +2,8 @@ import axios from 'axios';
 
 function resolveApiUrl() {
   const raw = process.env.REACT_APP_API_URL;
-  if (!raw) return 'http://localhost:8080/api';
+  // Se não achar a variável, aponta direto pro backend de produção para evitar o erro!
+  if (!raw) return 'https://eng-sof-ii.onrender.com/api';
   let url = raw.trim();
   if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
   url = url.replace(/\/+$/, '');
