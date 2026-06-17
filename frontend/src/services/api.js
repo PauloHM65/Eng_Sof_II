@@ -1,20 +1,12 @@
 import axios from 'axios';
 
-// Resolve a URL base da API.
-// Aceita tanto uma URL completa (ex.: https://host/api) quanto apenas o host
-// (ex.: agenda-backend.onrender.com), normalizando para https://host/api.
-// Isso permite que o render.yaml injete o host do backend via `fromService`.
 function resolveApiUrl() {
   const raw = process.env.REACT_APP_API_URL;
   if (!raw) return 'http://localhost:8080/api';
   let url = raw.trim();
-  if (!/^https?:\/\//i.test(url)) {
-    url = `https://${url}`;
-  }
+  if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
   url = url.replace(/\/+$/, '');
-  if (!/\/api$/i.test(url)) {
-    url = `${url}/api`;
-  }
+  if (!/\/api$/i.test(url)) url = `${url}/api`;
   return url;
 }
 
@@ -25,22 +17,28 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' }
 });
 
-// ========== CONTATOS (DEV 1 - Ana) ==========
-export const contatoService = {
-  listar: () => api.get('/contatos'),
-  buscar: (id) => api.get(`/contatos/${id}`),
-  criar: (contato) => api.post('/contatos', contato),
-  atualizar: (id, contato) => api.put(`/contatos/${id}`, contato),
-  deletar: (id) => api.delete(`/contatos/${id}`)
+export const pacienteService = {
+  listar: () => api.get('/pacientes'),
+  buscar: (id) => api.get(`/pacientes/${id}`),
+  criar: (paciente) => api.post('/pacientes', paciente),
+  atualizar: (id, paciente) => api.put(`/pacientes/${id}`, paciente),
+  deletar: (id) => api.delete(`/pacientes/${id}`)
 };
 
-// ========== COMPROMISSOS (DEV 2 - Bruno) ==========
-export const compromissoService = {
-  listar: () => api.get('/compromissos'),
-  buscar: (id) => api.get(`/compromissos/${id}`),
-  criar: (compromisso) => api.post('/compromissos', compromisso),
-  atualizar: (id, compromisso) => api.put(`/compromissos/${id}`, compromisso),
-  deletar: (id) => api.delete(`/compromissos/${id}`)
+export const profissionalService = {
+  listar: () => api.get('/profissionais'),
+  buscar: (id) => api.get(`/profissionais/${id}`),
+  criar: (profissional) => api.post('/profissionais', profissional),
+  atualizar: (id, profissional) => api.put(`/profissionais/${id}`, profissional),
+  deletar: (id) => api.delete(`/profissionais/${id}`)
+};
+
+export const atendimentoService = {
+  listar: () => api.get('/atendimentos'),
+  buscar: (id) => api.get(`/atendimentos/${id}`),
+  criar: (atendimento) => api.post('/atendimentos', atendimento),
+  atualizar: (id, atendimento) => api.put(`/atendimentos/${id}`, atendimento),
+  deletar: (id) => api.delete(`/atendimentos/${id}`)
 };
 
 export default api;
