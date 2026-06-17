@@ -28,8 +28,8 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: 🔨 Compilar e Empacotar
-        run: mvn clean package -DskipTests -B
+      - name: 🔨 Compilar e Testar
+        run: mvn verify -B
 
   # ========================================
   # JOB 2: TESTES E BUILD DO FRONTEND (React)
