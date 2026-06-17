@@ -2,9 +2,17 @@ import axios from 'axios';
 
 function resolveApiUrl() {
   const raw = process.env.REACT_APP_API_URL;
-  // Se não achar a variável, aponta direto pro backend de produção para evitar o erro!
-  if (!raw) return 'https://eng-sof-ii.onrender.com/api';
-  let url = raw.trim();
+  let url = raw ? raw.trim() : '';
+  
+  // Se o Render injetou o host interno (ex: agenda-backend-vksl ou agenda-backend-vksl:8080)
+  // Precisamos transformar isso na URL pública que o navegador consegue acessar
+  if (url && !url.includes('.onrender.com') && !url.includes('localhost')) {
+    const hostPart = url.split(':')[0]; // Remove a porta interna, se houver
+    url = `${hostPart}.onrender.com`;
+  }
+
+  if (!url) return 'https://agenda-backend-vksl.onrender.com/api';
+  
   if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
   url = url.replace(/\/+$/, '');
   if (!/\/api$/i.test(url)) url = `${url}/api`;
