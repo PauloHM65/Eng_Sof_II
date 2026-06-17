@@ -13,7 +13,7 @@ services:
   - type: web
     name: agenda-backend
     runtime: docker
-    repo: https://github.com/laudares26/agenda-web
+    repo: https://github.com/PauloHM65/Eng_Sof_II
     branch: main
     rootDir: backend
     dockerfilePath: ./Dockerfile
@@ -47,7 +47,7 @@ services:
   - type: web
     name: agenda-frontend
     runtime: static
-    repo: https://github.com/laudares26/agenda-web
+    repo: https://github.com/PauloHM65/Eng_Sof_II
     branch: main
     rootDir: frontend
     buildCommand: npm install && npm run build
