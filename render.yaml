@@ -14,13 +14,13 @@ services:
     name: agenda-backend
     runtime: docker
     repo: https://github.com/laudares26/agenda-web
-    branch: deploy
+    branch: main
     rootDir: backend
     dockerfilePath: ./Dockerfile
     dockerContext: .
     plan: free
     region: oregon
-    healthCheckPath: /api/contatos
+    healthCheckPath: /api/pacientes
     envVars:
       - key: DB_HOST
         fromDatabase:
@@ -48,7 +48,7 @@ services:
     name: agenda-frontend
     runtime: static
     repo: https://github.com/laudares26/agenda-web
-    branch: deploy
+    branch: main
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: build
